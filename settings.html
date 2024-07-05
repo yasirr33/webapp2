@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+
+<head>
+  <title>As Salah</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header>الصلاح ميقات</header>
+  <nav class="navbar" id="mynavbar">
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      &#9776; <!-- Hamburger icon -->
+    </a>
+    <a href="#settime">Set Date and Time</a>
+    <a href="#setup">Setup</a>
+    <a href="#Jamat">Salah Settings</a>
+    <a href="#Appearance">Appearance</a>
+    <a href="#update">Updates</a>
+    <a href="#home" class="active">As Salah Home</a>
+  </nav>
+  <section id="home">
+    <h2>AS SALAH MEEQAAT</h2>
+    <p>Welcome to Salah Meeqats, your trusted source for accurate Salah
+      times crafted in the heart of Kashmir. We specialize in providing
+      precise prayer timings, enhanced by Internet connectivity
+      options for seamless troubleshooting and management. Enjoy
+      the convenience of updates and customization, tailoring your
+      prayer experience to perfection with Salah Meeqats.
+    </p>
+  </section>
+
+  <section id="settime">
+    <h2>Set Time and Date</h2>
+    <div id="setdate">
+      <form id="formsetdate" method="POST" action="/setTime">
+        <br>
+        <label for="hour">Set Date & Time: </label>
+        <input type="datetime-local" class="input1" name="datetime" required>
+        <br>
+        <br>
+        <label for="day">Select a day:</label>
+        <select id="day" name="day">
+          <option value="0">Sunday</option>
+          <option value="1">Monday</option>
+          <option value="2">Tuesday</option>
+          <option value="3">Wednesday</option>
+          <option value="4">Thursday</option>
+          <option value="5">Friday</option>
+          <option value="6">Saturday</option>
+        </select>
+        <br><br>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+    </div>
+    <br>
+    <br>
+    <div id=shijri>
+      <h2>Hijri Adjustment</h2>
+      <form id="hijri" name="hijri" action="/hijri" method="post">
+        <input type="hidden" name="adjustmentValue" id="textInput" min="-2" max="2" value="0">
+        <button type="button" class="submit" onclick="changeValue(-2)">-2</button>
+        <button type="button" class="submit" onclick="changeValue(-1)">-1</button>
+        <button type="button" class="submit" onclick="changeValue(0)">Reset</button>
+        <button type="button" class="submit" onclick="changeValue(1)">+1</button>
+        <button type="button" class="submit" onclick="changeValue(2)">+2</button>
+
+      </form>
+    </div>
+  </section>
+  <section id="Jamat">
+    <h2>Set Salah Times</h2>
+    <div id="salahtime">
+      <select id="formSelectorJamat">
+        <option>Select Jamaat</option>
+        <option value="fajrform">Fajr</option>
+        <option value="zuhrform">Zuhar</option>
+        <option value="asrform">Asr</option>
+        <option value="mgribform">Maghrib</option>
+        <option value="ishaform">Isha</option>
+        <option value="reset">Reset to Default</option>
+      </select>
+
+
+      <form method="POST" action="/setFajr" id="fajrform" class="salahForms">
+        <div class="form-group">         
+        <label for="fajrjmt" class="name">Set Fajr Jamaat: </label>
+        <input type="time" class="input" name="fajrjmt" required>
+        </div>
+        <div class="form-group">
+          <label for="FajrCheckbox" class="name">Mode: </label>
+        <select id="AMPM" name="FajrCheckbox" required>
+          <option value="0">Accurate</option>
+          <option value="1">5 Minute</option>
+        </select>
+        </div>
+        <button type="submit" class="submit">Submit</button>
+        </fieldset>
+      </form>
+
+
+      <form method="POST" action="/setZuhr" id="zuhrform" class="salahForms">      
+        <div class="form-group">
+        <label for="zuhrazn" class="name">Set Zuhar Azan:  </label>
+        <input type="time" class="input" name="zuhrazn" required>
+      </div>
+        <div class="form-group">
+        <label for="zuhrjmt" class="name">Set Zuhar Jamaat:  </label>
+        <input type="time" class="input" name="zuhrjmt" required>
+      </div>
+        <div class="form-group">
+        <label for="jumaazn" class="name">Set Jumah Azan:  </label>
+        <input type="time" class="input" name="jumaazn" required>
+      </div>
+        <div class="form-group">
+        <label for="jumajmt" class="name">Set Jumah Jamaat:  </label>
+        <input type="time" class="input" name="jumajmt" required>
+      </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+
+
+      <form method="POST" action="/setAsr" id="asrform" class="salahForms">
+        <div class="form-group">
+        <label for="addAzanAsr" class="name">Azan Adjustment: </label>
+        <label for="operation"></label>
+        <select name="operation" id="operation">
+          <option value="add">Add</option>
+          <option value="subtract">Subtract</option>
+        </select>             
+        <input type="number" class="input" name="addAzanAsr" min="0" max="58">
+        <h4 class=name>Mins</h4>
+        </div>
+        <div class="form-group">
+          <label for="AsrAzanCheckbox" class="name">Azan Mode: </label>     
+        <select id="AMPM" name="AsrAzanCheckbox" required>          
+          <option value="0">Accurate</option>
+          <option value="1">5 Minute</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="asrjmt" class="name">Set Asr Jamaat:</label>
+        <input type="time" class="input" name="asrjmt" required>
+      </div>
+        <div class="form-group">
+          <label for="AsrCheckbox" class="name">Jamaat Mode:</label>  
+        <select id="AMPM" name="AsrCheckbox" required>
+          <option value="0">Accurate</option>
+          <option value="1">Minute</option>
+        </select>
+        </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+
+
+      <form method="POST" action="/setMaghrib" id="mgribform" class="salahForms">
+        <div class="form-group">
+        <label for="mgribjmt" class="name">Set Maghrib Jamaat: </label>
+        <input type="time" class="input" name="mgribjmt" required>
+        </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+
+
+      <form method="POST" action="/setIsha" id="ishaform" class="salahForms">
+        <div class="form-group">
+        <label for="addAzanIsha" class ="name">Azan Adjustment: </label>
+        <h4 class=name>Add</h4>
+        <input type="number" class="input" name="addAzanIsha" min="0" max="59">
+        <h4 class=name>Mins</h4>
+        </div>
+        <div class="form-group">
+        <label for="addAzanIsha" class ="name">Azan Mode: </label>
+        <select id="AMPM" name="IshaAzanCheckbox" required>
+          <option value="0">Accurate</option>
+          <option value="1">5 Minute</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="ishajmt" class="name">Set Isha Jamaat: </label>
+        <input type="time" class="input" name="ishajmt" required>
+        </div>
+        <div class="form-group">
+        <label for="IshaCheckbox" class="name">Jamaat Mode:</label>
+        <select id="AMPM" name="IshaCheckbox" required>
+          <option value="0">Accurate</option>
+          <option value="1">5 Minute</option>
+        </select>
+      </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+
+      <form method="POST" action="/reset" id="reset">
+        <input type="hidden" name="resettodefault" value="1">
+        <button type="submit" class="submit">Reset</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="Appearance">
+    <h2>Set Appearance</h2>
+    <div id="salahtime">
+      <select id="formSelectorAppearance">
+        <option>Choose Element</option>
+        <option value="jamatapp">Jamat Panel</option>
+        <option value="azanapp">Azan Panel</option>
+        <option value="timeapp">Time Panel</option>
+        <option value="dateapp">Date Hijri</option>
+        <option value="monthapp">Month</option>
+        <option value="date2app">Date English</option>
+        <option value="tuluhapp">Tuluh Panel</option>
+        <option value="salahapp">Salah Times</option>
+        <option value="brightness">Set Brightness</option>
+      </select>
+      <form method="POST" action="/jamatpanel" id="jamatapp" class="salahForms">
+        <div class="form-group">
+        <label for="color">Select a color:</label>
+        <input type="color" id="color" name="color" value="#ff0000">
+        </div>
+        <button type="submit" class="submit">Submit</button>
+        </fieldset>
+      </form>
+      <form method="POST" action="/azanpanel" id="azanapp" class="salahForms">
+        <div class="form-group">
+        <label for="color">Select a color:</label>
+        <input type="color" id="color" name="color" v>
+      </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+      <form method="POST" action="/timepanel" id="timeapp" class="salahForms">
+        <div class="form-group">
+        <label for="color">Select a color:</label>
+        <input type="color" id="color" name="color" v>
+      </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+      <form method="POST" action="/datepanel" id="dateapp" class="salahForms">
+        <div class="form-group">
+        <label for="color">Select a color:</label>
+        <input type="color" id="color" name="color" value="#ff0000">
+      </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+      <form method="POST" action="/monthpanel" id="monthapp" class="salahForms">
+        <div class="form-group">
+        <label for="color">Select a color:</label>
+        <input type="color" id="color" name="color" value="#ff0000">
+      </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+      <form method="POST" action="/date2panel" id="date2app" class="salahForms">
+        <div class="form-group">
+        <label for="color">Select a color:</label>
+        <input type="color" id="color" name="color" value="#ff0000">
+      </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+      <form method="POST" action="/tuluhpanel" id="tuluhapp" class="salahForms">
+        <div class="form-group">
+        <label for="color">Select a color:</label>
+        <input type="color" id="color" name="color" value="#ff0000">
+      </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+      <form method="POST" action="/salahpanel" id="salahapp" class="salahForms">
+        <div class="form-group">
+        <label for="color">Select a color:</label>
+        <input type="color" id="color" name="color" value="#ff0000">
+      </div>
+        <button type="submit" class="submit">Submit</button>
+      </form>
+      <form method="POST" action="/brightness" id="brightness" class="salahForms">
+        
+        <label for="color">Adjust Brightness:</label>
+        <input name="brightness" type="range" min="1" max="255" value="50" class="slider" id="myRange">      
+        <button type="submit" class="submit">Submit</button>
+      </form>
+
+
+    </div>
+  </section>
+
+
+  <div id="setup">
+    <h2>Select Jamaat Mode</h2>
+    <form action="/mode" method="POST">
+      <br><br>
+      <label>
+        <input type="radio" name="mode" value="hanafi" checked> Hanafi Times
+      </label>
+      <br><br>
+      <label>
+        <input type="radio" name="mode" value="shafii"> Shafi'i, Maliki, Ja'fari, and Hanbali Times
+      </label>
+      <br><br>
+      <select id="location" name="location">
+        <option value="-2">Anantnag</option>
+        <option value="0">Srinagar</option>
+        <option value="-1">Kulgam</option>
+        <option value="-3">Pahalgam</option>
+        <option value="-1">Pulwama</option>
+        <option value="-2">Tral</option>
+        <option value="-2">Kud</option>
+        <option value="-1">Harmukh</option>
+        <option value="-11">Leh</option>
+        <option value="+3">Uri</option>
+        <option value="+1">Baramulla</option>
+        <option value="+2">Bandipora</option>
+        <option value="+1">Tangmarg</option>
+        <option value="+1">Sopore</option>
+        <option value="+4">Karnah</option>
+        <option value="+2">Poonch</option>
+      </select>
+      <br><br>
+      <button type="submit" class="submit">Submit</button>
+    </form>
+  </div>
+
+
+  <section id="update">
+    <div id="update">
+      <h2>Instructions</h2>
+      <div id="Instructions">
+        <p><b>For Updates:</b></p>
+        <ol>
+          <li>Go to menu</li>
+          <li>Select Updates from Options</li>
+          <li>Click on the Find Updates Button</li>
+          <li>If an Update is availiable, the Meeqaat should go into Boot Mode, No Display</li>
+          <li>Do Not close the connection or reset the Meeqat untill it restarts</li>
+        </ol>
+      </div>
+      <h2>Updates</h2>
+      <p>If there is something wrong with the Meeqaat, we'll provide an update.<br>
+        Note: Do not update the firmware unnessarily.</p>
+      <form method="POST" action="/update">
+        <input type="hidden" name="searchforupdates" value="1">
+        <button class="submit" onlick="startProgressBar()">Update</button>
+      </form>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var asrForm = document.getElementById('asrform');
+
+    asrForm.onsubmit = function(e) {
+        // Prevent the form from submitting immediately
+        e.preventDefault();
+
+        var operation = asrForm.querySelector('select[name="operation"]').value;
+        var minutesElement = asrForm.querySelector('input[name="addAzanAsr"]');
+        var minutes = parseInt(minutesElement.value, 10);
+
+        if (operation === 'subtract') {
+            minutes = -minutes;
+        }
+
+        // Update the input with the modified value
+        minutesElement.value = minutes;
+
+        // Now submit the form programmatically
+        asrForm.submit();
+    };
+});
+    function changeValue(change) {
+      var valueInput = document.getElementById("textInput");
+      var newValue = parseInt(change);
+      valueInput.value = newValue;
+      document.getElementById("hijri").submit();
+    }
+    function myFunction() {
+      var x = document.getElementById("mynavbar");
+      if (x.className === "navbar") {
+        x.className += " responsive";
+      } else {
+        x.className = "navbar";
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      var formSelectorJamat = document.getElementById('formSelectorJamat');
+      var formSelectorAppearance = document.getElementById('formSelectorAppearance');
+      var forms = document.querySelectorAll('#salahtime form');
+
+      formSelectorJamat.addEventListener('change', function () {
+        var selectedFormId = this.value;
+        var selectedForm = document.getElementById(selectedFormId);
+
+        // Hide all forms
+        forms.forEach(function (form) {
+          form.style.display = 'none';
+        });
+
+        // Show the selected form
+        selectedForm.style.display = 'flex';
+      });
+
+      formSelectorAppearance.addEventListener('change', function () {
+        var selectedFormId = this.value;
+        var selectedForm = document.getElementById(selectedFormId);
+
+        // Hide all forms
+        forms.forEach(function (form) {
+          form.style.display = 'none';
+        });
+
+        // Show the selected form
+        selectedForm.style.display = 'flex';
+      });
+    });
+
+  </script>
+</body>
+<footer>
+  <h2>Contact Us</h2>
+  <div id="contactus">
+    <p>For any Queries or Complaints<br>
+      Please Contact Us at<br>
+      +916006213811<br>
+      Or mail us at<br>
+      assalahmeeqat@gmail.com</p>
+  </div>
+</footer>
